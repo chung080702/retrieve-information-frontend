@@ -1,24 +1,28 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getPost } from "../api";
 
 function Post() {
     var { postId } = useParams();
     var [post, setPost] = useState({});
+
+    const fetchPost = async (postId) => {
+        post = {
+            title: "demo",
+            content: 'content'
+        }
+        setPost(post);
+        console.log(post);
+    }
+
     useEffect(() => {
         const main = async () => {
-            post = await getPost(postId);
-            setPost(post);
-            console.log(post);
+            await fetchPost(postId);
         }
         main()
-    }, [])
-    return <div style={{ padding: '0px 20%', backgroundColor: '#605A60', height: '100vh' }}>
-        <div style={{ backgroundColor: 'white', height: '100vh', padding: '20px' }}>
-            <div style={{ fontSize: '30px', marginBottom: '20px' }}>{post.title}</div>
-            <div>{post.content}</div>
-        </div>
-
+    }, [postId])
+    return <div>
+        <div style={{ fontSize: '30px', marginBottom: '20px' }}>{post.title}</div>
+        <div>{post.content}</div>
     </div>
 }
 
