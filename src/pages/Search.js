@@ -1,49 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { infixToPostfix } from "../utils";
+import { fetchPostList } from "../api";
 
-const examplePostList = [
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-    {
-        title: "demo1",
-        postId: "123"
-    },
-]
 
 function Search() {
     let { msg, pageNumber } = useParams();
@@ -54,10 +13,6 @@ function Search() {
     let [positionSearch, setPositionSeacrh] = useState(0);
     let [idx, setIdx] = useState(-1);
     const navigate = useNavigate();
-
-    const fetchPostList = async (msg, pageNumber) => {
-        setPostList(examplePostList)
-    }
 
     const fetchSuggestList = (msg) => {
         let pos = positionSearch - 1;
@@ -121,7 +76,9 @@ function Search() {
     useEffect(() => {
         const main = async () => {
             if (msg != undefined) {
-                fetchPostList(msg, pageNumber)
+                postList = await fetchPostList(msg, pageNumber);
+                console.log(postList);
+                setPostList(postList);
             }
         }
         main();

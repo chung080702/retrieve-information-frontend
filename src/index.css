@@ -37,6 +37,7 @@ a {
 .glass-container {
   display: block;
   width: 70vw;
+
   background: rgba(0, 0, 0, 0.56);
   padding: 50px;
   border-radius: 16px;
@@ -45,7 +46,10 @@ a {
   -webkit-backdrop-filter: blur(11.6px);
 }
 
-
+.post {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
 
 .logo {
   display: inline-block;
@@ -179,4 +183,20 @@ input {
 .highlight {
   padding: 0px 2px;
   font-weight: bold;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
 }
