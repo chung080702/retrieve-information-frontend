@@ -76,6 +76,7 @@ function Search() {
     useEffect(() => {
         const main = async () => {
             if (msg != undefined) {
+                console.log(123);
                 postList = await fetchPostList(msg, pageNumber);
                 console.log(postList);
                 setPostList(postList);
@@ -127,7 +128,7 @@ function Search() {
                                 if (e.key === 'Enter') {
                                     let msg = handleMsg(searchMsg)
                                     if (msg.length == 0) alert("Invalid input");
-                                    else navigate(`/search/msg/${msg}/page/1`)
+                                    else navigate(`/search/msg/${msg}/page/0`)
                                     setPositionSeacrh(0);
                                 }
                             }
@@ -153,8 +154,8 @@ function Search() {
                 <img src="/Information.png" />
             </div> :
             <div style={{ display: 'flex', flexDirection: 'column' }} class="content-item">
-                <ol class='post-list' start={`${pageNumber * 10 - 9}`}>
-                    {postList.map(e => <li class='post-item' onClick={() => navigate(`/post/${e.postId}`)}>{e.title}</li>)}
+                <ol class='post-list' start={`${pageNumber * 10 + 1}`}>
+                    {postList.map(e => <li class='post-item' onClick={() => navigate(`/post/${e.docId}`)}>{e.title}</li>)}
                 </ol>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     {pageNumber > 1 &&

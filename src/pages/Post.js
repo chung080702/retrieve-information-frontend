@@ -5,19 +5,17 @@ import { fetchPost } from "../api";
 
 function Post() {
     var { postId } = useParams();
-    var [post, setPost] = useState({});
+    var [post, setPost] = useState('');
 
     useEffect(() => {
         const main = async () => {
             post = await fetchPost(postId);
-            console.log(post);
             setPost(post);
         }
         main()
     }, [postId])
-    return <div class='post'>
-        <div style={{ fontSize: '30px', marginBottom: '20px' }}>{post.title}</div>
-        <div dangerouslySetInnerHTML={{ __html: element }}></div>
+    return <div class='post' style={{ marginTop: '10px' }}>
+        <div dangerouslySetInnerHTML={{ __html: post }} ></div>
     </div>
 }
 
