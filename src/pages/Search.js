@@ -12,6 +12,7 @@ function Search() {
     let [dictionary, setDictionary] = useState([]);
     let [positionSearch, setPositionSeacrh] = useState(0);
     let [idx, setIdx] = useState(-1);
+    let [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const fetchSuggestList = (msg) => {
@@ -76,10 +77,11 @@ function Search() {
     useEffect(() => {
         const main = async () => {
             if (msg != undefined) {
-                console.log(123);
+                setLoading(true);
                 postList = await fetchPostList(msg, pageNumber);
-                console.log(postList);
                 setPostList(postList);
+                setLoading(false);
+                console.log(loading)
             }
         }
         main();
@@ -135,7 +137,7 @@ function Search() {
 
                         }}>
                     </input>
-                    <img src="/search.png" style={{ width: '20px', marginLeft: 'auto' }}></img>
+                    {loading ? <div class="loader"></div> : <img src="/search.png" style={{ width: '20px', marginLeft: 'auto' }}></img>}
                 </div>
                 {suggestList.map((e, i) =>
                     <div class='input-item' style={i == idx ? { backgroundColor: 'rgb(164, 202, 243)' } : {}}>
